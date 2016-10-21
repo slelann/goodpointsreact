@@ -24,6 +24,21 @@
         signed-in="{{signedIn}}"
         user="{{user}}">
     </firebase-auth>
+
+    <firebase-document
+        id="kid"
+        app-name="goodpoints"
+        path="[[editableNoteId]]"
+        data="{{kid}}">
+    </firebase-document>
+
+    <paper-fab
+        icon="add"
+        on-tap="create"
+        disabled="[[!online]]"
+        aria-label="Add kid">
+    </paper-fab>
+
   </template>
 
   <script>
@@ -33,6 +48,14 @@
 
             signIn: function() {
                 this.$.auth.signInWithPopup();
+            },
+
+            get kidsPath() {
+              return '/kids/';
+            },
+
+            toKidId: function(kidId) {
+              return this.kidsPath + '/' + kidId;
             }
         });
   </script>
